@@ -15,7 +15,8 @@ func init() {
 	initializer.RegisterModuleInitializer(initModule)
 }
 
-func initModule(cfg *config.Config, h *stdhttp.HTTP) (err error) {
+func initModule(cfg interface{}, h *stdhttp.HTTP) (err error) {
+	appCfg := cfg.(*config.Config)
 	// do something
 
 	log.Message(log.INFO, "module1 initialized")

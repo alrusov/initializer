@@ -1,14 +1,10 @@
 package initializer
 
-import (
-	"github.com/alrusov/stdhttp"
-)
-
 //----------------------------------------------------------------------------------------------------------------------------//
 
 type (
 	// Инициализатор модуля
-	ModuleInitializer func(cfg interface{}, h *stdhttp.HTTP) error
+	ModuleInitializer func(cfg any, h any) error
 )
 
 var (
@@ -26,7 +22,7 @@ func RegisterModuleInitializer(f ModuleInitializer) {
 //----------------------------------------------------------------------------------------------------------------------------//
 
 // Инициализируем модули
-func Do(cfg interface{}, h *stdhttp.HTTP) (err error) {
+func Do(cfg any, h any) (err error) {
 	for _, f := range initializers {
 		err = f(cfg, h)
 		if err != nil {
