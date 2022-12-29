@@ -1,5 +1,11 @@
 package initializer
 
+import (
+	"fmt"
+	"reflect"
+	"runtime"
+)
+
 //----------------------------------------------------------------------------------------------------------------------------//
 
 type (
@@ -26,6 +32,7 @@ func Do(cfg any, h any) (err error) {
 	for _, f := range initializers {
 		err = f(cfg, h)
 		if err != nil {
+			err = fmt.Errorf("[%s] %s", runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), err)
 			return
 		}
 	}
