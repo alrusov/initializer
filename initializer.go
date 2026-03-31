@@ -32,7 +32,7 @@ func Do(cfg any, h any) (err error) {
 	for _, f := range initializers {
 		err = f(cfg, h)
 		if err != nil {
-			err = fmt.Errorf("[%s] %s", runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), err)
+			err = fmt.Errorf("[%s] %w", runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name(), err)
 			return
 		}
 	}
